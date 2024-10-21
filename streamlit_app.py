@@ -17,7 +17,7 @@ prompt = st.text_input("Enter your prompt for text completion:")
 token_length = st.number_input("Enter the number of tokens for this repsonse:", min_value=1, value=50)
 
 ### Generate the answer to the question "Damascus is a"
-generator("Damascus is a", max_length=20, num_return_sequences=10, truncation=True)
+print(generator("Damascus is a", max_length=20, num_return_sequences=10, truncation=True))
 
 
 
