@@ -19,7 +19,6 @@ if st.button("Generate Response"):
     st.subheader("High Creativity Response:")
     st.write(high_creativity_response)
 
-    # Generate predictable response (low temperature)
     low_creativity_response = tokenizer.decode(model.generate(input, max_length=token_length, num_return_sequences=1)[0])
     st.subheader("Predictable Response:")
     st.write(low_creativity_response)
