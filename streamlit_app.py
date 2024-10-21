@@ -1,7 +1,9 @@
 import streamlit as st
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer
 
 generator = pipeline('text-generation', model='gpt2')
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
+tokenizer.pad_token = tokenizer.eos_token
 
 # Show title and description.
 st.title("💬 Chat GPT-2 Chatbot")
@@ -12,7 +14,9 @@ token_length = st.number_input("Enter the number of tokens for this repsonse:", 
 
 # Ask for the user's input
 if prompt := st.text_input("Enter your prompt for text completion:"):
-    generator(prompt, max_length=token_length, num_return_sequences=10, truncation=True)
+    generated_tokens = generator(prompt, max_length=token_length, num_return_sequences=10, truncation=True)
+    for i in range(10):
+        print(tokenizer.batch_decode(generated_tokens)[i])
 
 
 
