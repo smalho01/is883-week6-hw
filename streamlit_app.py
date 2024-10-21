@@ -14,10 +14,10 @@ prompt = st.text_input("Enter your prompt for text completion:")
 if st.button("Generate Response"):
     input = tokenizer.encode(prompt, return_tensors='pt')
 
-    high_creativity_response = tokenizer.decode(model.generate(input, max_length=token_length, num_return_sequences=1, temperature=1.0)[0])
+    high_creativity_response = tokenizer.decode(model.generate(input, max_length=token_length, num_return_sequences=1, temperature=1.0, do_sample=True)[0])
     st.subheader("High Creativity Response:")
     st.write(high_creativity_response)
 
-    low_creativity_response = tokenizer.decode(model.generate(input, max_length=token_length, num_return_sequences=1, temperature=0.1)[0])
+    low_creativity_response = tokenizer.decode(model.generate(input, max_length=token_length, num_return_sequences=1, temperature=0.1, do_sample=True)[0])
     st.subheader("Predictable Response:")
     st.write(low_creativity_response)
