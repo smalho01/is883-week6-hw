@@ -6,9 +6,8 @@ tokenizer = AutoTokenizer.from_pretrained("gpt2")
 tokenizer.pad_token = tokenizer.eos_token
 
 st.title("💬 Chat GPT-2 Completion Chatbot")
-st.write(
-    "This is a simple chatbot that uses OpenAI's GPT-2 model to generate text completion responses. "
-)
+st.write("This is a simple chatbot that uses OpenAI's GPT-2 model to generate text completion responses.")
+
 token_length = st.number_input("Enter the number of tokens for this repsonse:", min_value=1, value=20)
 prompt = st.text_input("Enter your prompt for text completion:")
 
