@@ -1,23 +1,18 @@
 import streamlit as st
 from transformers import pipeline
 
+generator = pipeline('text-generation', model='gpt2')
+
 # Show title and description.
 st.title("💬 Chat GPT-2 Chatbot")
 st.write(
     "This is a simple chatbot that uses OpenAI's GPT-2 model to generate text completion responses. "
 )
-
-### Create a GPT2 generator pipeline
-generator = pipeline('text-generation', model='gpt2')
-
-# Ask for the user's input
-prompt = st.text_input("Enter your prompt for text completion:")
-
-#  Ask for token length following user input
 token_length = st.number_input("Enter the number of tokens for this repsonse:", min_value=1, value=50)
 
-### Generate the answer to the question "Damascus is a"
-print(generator("Damascus is a", max_length=20, num_return_sequences=10, truncation=True))
+# Ask for the user's input
+if prompt := st.text_input("Enter your prompt for text completion:"):
+    generator(prompt, max_length=token_length, num_return_sequences=10, truncation=True)
 
 
 
@@ -33,7 +28,7 @@ print(generator("Damascus is a", max_length=20, num_return_sequences=10, truncat
 
 # Create a chat input field to allow the user to enter a message. This will display
 # automatically at the bottom of the page.
-# if prompt != None:
+if prompt := st.chat_input("What is up?"):
 
 #     # Store and display the current prompt.
 #     st.session_state.messages.append({"role": "user", "content": prompt})
