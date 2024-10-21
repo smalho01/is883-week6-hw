@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import pipeline
 
 # Show title and description.
 st.title("💬 Chat GPT-2 Chatbot")
