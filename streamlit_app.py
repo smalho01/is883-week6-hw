@@ -34,20 +34,20 @@ if prompt := st.chat_input("What is up?"):
         st.markdown(prompt)
 
     #  Ask for token length following user input
-    token_length = st.number_input("Enter the number of tokens:", min_value=1, value=50)
+    token_length = st.number_input("Enter the number of tokens for this repsonse:", min_value=1, value=50)
 
-    # Generate a response using the OpenAI API.
-    stream = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": m["role"], "content": m["content"]}
-            for m in st.session_state.messages
-        ],
-        stream=True,
-    )
+    # # Generate a response using the OpenAI API.
+    # stream = client.chat.completions.create(
+    #     model="gpt-3.5-turbo",
+    #     messages=[
+    #         {"role": m["role"], "content": m["content"]}
+    #         for m in st.session_state.messages
+    #     ],
+    #     stream=True,
+    # )
 
-    # Stream the response to the chat using `st.write_stream`, then store it in 
-    # session state.
-    with st.chat_message("assistant"):
-        response = st.write_stream(stream)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    # # Stream the response to the chat using `st.write_stream`, then store it in 
+    # # session state.
+    # with st.chat_message("assistant"):
+    #     response = st.write_stream(stream)
+    # st.session_state.messages.append({"role": "assistant", "content": response})
