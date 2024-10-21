@@ -1,16 +1,18 @@
 import streamlit as st
 from openai import OpenAI
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 # Show title and description.
-st.title("💬 Chatbot")
+st.title("💬 Chat GPT-2 Chatbot")
 st.write(
-    "This is a simple chatbot that uses OpenAI's GPT-3.5 model to generate responses. "
-    "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
-    "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
+    "This is a simple chatbot that uses OpenAI's GPT-2 model to generate responses. "
 )
 
-# Create an OpenAI client.
-client = OpenAI(api_key=st.secrets['MyOpenAIKey'])
+# Load the pretrained model 
+model = GPT2LMHeadModel.from_pretrained("gpt2")
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+
 
 # Create a session state variable to store the chat messages. This ensures that the
 # messages persist across reruns.
@@ -30,6 +32,9 @@ if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
+
+    #  Ask for token length following user input
+    token_length = st.number_input("Enter the number of tokens:", min_value=1, value=50)
 
     # Generate a response using the OpenAI API.
     stream = client.chat.completions.create(
