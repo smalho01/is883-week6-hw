@@ -1,5 +1,4 @@
 import streamlit as st
-from openai import OpenAI
 from transformers import pipeline
 
 # Show title and description.
@@ -8,14 +7,17 @@ st.write(
     "This is a simple chatbot that uses OpenAI's GPT-2 model to generate text completion responses. "
 )
 
-# Load the pretrained model
-# generator = pipeline('text-generation', model='gpt2')
+### Create a GPT2 generator pipeline
+generator = pipeline('text-generation', model='gpt2')
 
 # Ask for the user's input
 prompt = st.text_input("Enter your prompt for text completion:")
 
 #  Ask for token length following user input
 token_length = st.number_input("Enter the number of tokens for this repsonse:", min_value=1, value=50)
+
+### Generate the answer to the question "Damascus is a"
+generator("Damascus is a", max_length=20, num_return_sequences=10, truncation=True)
 
 
 
@@ -31,7 +33,7 @@ token_length = st.number_input("Enter the number of tokens for this repsonse:", 
 
 # Create a chat input field to allow the user to enter a message. This will display
 # automatically at the bottom of the page.
-# if prompt := st.chat_input("What is up?"):
+# if prompt != None:
 
 #     # Store and display the current prompt.
 #     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -39,15 +41,15 @@ token_length = st.number_input("Enter the number of tokens for this repsonse:", 
 #         st.markdown(prompt)
 
 
-    # # Generate a response using the OpenAI API.
-    # stream = client.chat.completions.create(
-    #     model="gpt-3.5-turbo",
-    #     messages=[
-    #         {"role": m["role"], "content": m["content"]}
-    #         for m in st.session_state.messages
-    #     ],
-    #     stream=True,
-    # )
+    # Generate a response using the OpenAI API.
+    stream = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": m["role"], "content": m["content"]}
+            for m in st.session_state.messages
+        ],
+        stream=True,
+    )
 
     # # Stream the response to the chat using `st.write_stream`, then store it in 
     # # session state.
