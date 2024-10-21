@@ -9,7 +9,7 @@ st.write(
 )
 
 # Load the pretrained model
-generator = pipeline('text-generation', model='gpt2')
+# generator = pipeline('text-generation', model='gpt2')
 
 # Ask for the user's input
 prompt = st.text_input("Enter your prompt for text completion:")
