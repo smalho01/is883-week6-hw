@@ -9,8 +9,8 @@ st.write(
 )
 
 # Load the pretrained model 
-model = GPT2LMHeadModel.from_pretrained("gpt2")
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+# model = GPT2LMHeadModel.from_pretrained("gpt2")
+# tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 
 
